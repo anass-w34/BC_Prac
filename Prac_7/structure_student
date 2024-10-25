@@ -1,0 +1,40 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.26;
+
+// Creating a Smart Contract
+contract StudentManagement {
+
+    // Structure of student 
+    struct Student {
+        uint rollno;          // Roll number
+        string name;         // Name
+        string class;        // Class
+        string department;    // Department
+        string courseEnrolled; // Course Enrolled
+    }
+
+    Student[] public stds; // Array to store students
+
+    // Function to add student details
+    function addStudent(uint rollno, string memory name, string memory class, string memory department, string memory courseEnrolled) public {
+        require(stds.length < 5, "Maximum 5 students can be added."); // Limit to 5 students
+        Student memory s = Student(rollno, name, class, department, courseEnrolled);
+        stds.push(s);
+    }
+
+    // Function to get details of a student by Roll No
+    function getStudent(uint rollno) public view returns (string memory, string memory, string memory, string memory, string memory) {
+        for (uint i = 0; i < stds.length; i++) {
+            Student memory s = stds[i];
+            if (s.rollno == rollno) {
+                return (s.name, s.class, s.department, s.courseEnrolled, "Found");
+            }
+        }
+        return ("Not Found", "Not Found", "Not Found", "Not Found", "Not Found");
+    }
+
+    // Function to display all student information
+    function getAllStudents() public view returns (Student[] memory) {
+        return stds;
+    }
+}
