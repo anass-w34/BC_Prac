@@ -1,0 +1,45 @@
+// SPDX-License-Identifier: MIT
+pragma solidity ^0.8.28;
+
+contract Courses {
+    struct Instructor {
+        uint age;
+        string fName;
+        string lName;
+    }
+
+    mapping(address => Instructor) instructors; // Mapping from address to Instructor
+    address[] public instructorAccts; // Array of instructor addresses
+
+    // Function to set instructor details
+    function setInstructor(address _address, uint _age, string memory _fName, string memory _lName) public {
+        instructors[_address] = Instructor(_age, _fName, _lName);
+        
+        // Only add the address if it's not already present
+        bool exists = false;
+        for (uint i = 0; i < instructorAccts.length; i++) {
+            if (instructorAccts[i] == _address) {
+                exists = true;
+                break;
+            }
+        }
+        if (!exists) {
+            instructorAccts.push(_address);
+        }
+    }
+
+    // Function to get all instructor addresses
+    function getInstructors() public view returns (address[] memory) {
+        return instructorAccts;
+    }
+
+    // Function to get instructor details by address
+    function getInstructor(address _address) public view returns (uint, string memory, string memory) {
+        return (instructors[_address].age, instructors[_address].fName, instructors[_address].lName);
+    }
+
+    // Function to count the number of instructors
+    function countInstructors() public view returns (uint) {
+        return instructorAccts.length;
+    }
+}
