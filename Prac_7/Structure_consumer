@@ -1,0 +1,67 @@
+pragma solidity ^0.8.26;
+
+contract ElectricityBill {
+
+    struct Consumer {
+        string name;
+        string addressConsumer;
+        uint256 consumerID;
+        uint256 unitsConsumed;
+        uint256 amount;
+    }
+
+    Consumer[5] public consumers;
+
+    function calculateBill(uint256 units) internal pure returns (uint256) {
+        uint256 amount = 0;
+
+        if (units <= 50) {
+            amount = units * 50; // Rs. 0.50/unit
+        } else if (units <= 150) {
+            amount = (50 * 50) + ((units - 50) * 75); // Rs. 0.50 for first 50, Rs. 0.75 for next 100
+        } else if (units <= 250) {
+            amount = (50 * 50) + (100 * 75) + ((units - 150) * 120); // Rs. 0.50 for first 50, Rs. 0.75 for next 100, Rs. 1.20 for next 100
+        } else {
+            amount = (50 * 50) + (100 * 75) + (100 * 120) + ((units - 250) * 150); // Rs. 0.50 for first 50, Rs. 0.75 for next 100, Rs. 1.20 for next 100, Rs. 1.50 for above 250
+        }
+
+        // Adding 20% surcharge
+        amount = (amount * 120) / 100; // Adding 20% surcharge
+
+        return amount;
+    }
+
+    function addConsumer(
+        uint256 index,
+        string memory name,
+        string memory addressConsumer,
+        uint256 consumerID,
+        uint256 unitsConsumed
+    ) public {
+        require(index < consumers.length, "Index out of bounds");
+        
+        uint256 billAmount = calculateBill(unitsConsumed);
+        
+        consumers[index] = Consumer({
+            name: name,
+            addressConsumer: addressConsumer,
+            consumerID: consumerID,
+            unitsConsumed: unitsConsumed,
+            amount: billAmount
+        });
+    }
+
+    function getConsumerInfo(uint256 index) public view returns (
+        string memory name,
+        string memory addressConsumer,
+        uint256 consumerID,
+        uint256 unitsConsumed,
+        uint256 amount
+    ) {
+        require(index < consumers.length, "Index out of bounds");
+
+        Consumer storage consumer = consumers[index];
+        return (consumer.name, consumer.addressConsumer, consumer.consumerID, consumer.unitsConsumed, consumer.amount);
+    }
+}
+
