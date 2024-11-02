@@ -1,3 +1,26 @@
+open remix ide
+crete folder then create file as election.sol
+
+copy code
+go to solidity compiler and then compile take version 0.8.0
+deploy and run
+deploy
+
+
+metamask config
+open metamsk
+
+
+ehterum mennet pe jao add network
+ganache m se rpc url past karna h 
+chain id is 1337
+swtich from ethereum mennet to ganache do t from show test network
+
+click on accunt
+import accont
+add private key from ganache
+
+
 // SPDX-License-Identifier: MIT
 pragma solidity ^0.8.0;
 
