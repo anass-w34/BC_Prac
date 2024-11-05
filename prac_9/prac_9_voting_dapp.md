@@ -1,16 +1,4 @@
 
-Creating a decentralized voting application on Ethereum is a great way to explore blockchain development. We'll use Truffle for smart contract development, Ganache for a local blockchain environment, and Visual Studio Code (VSCode) as our IDE. In this tutorial, I'll guide you step-by-step to create a basic voting Dapp where users can vote on pre-defined candidates.
-
-Overview of the Voting Dapp
-This Dapp will:
-
-Allow the administrator to add candidates.
-Allow users to vote for a candidate.
-Track and display the votes for each candidate.
-Prevent double voting by individual users.
-Requirements
-Ensure you have the following tools installed:
-
 Node.js and npm
 Truffle
 Ganache
@@ -26,16 +14,15 @@ Install Truffle globally:
 bash
 npm install -g truffle
 
-
-Download and install Ganache for creating a local Ethereum blockchain.
 Create a New Truffle Project:
 Open VSCode, then create a new project folder and navigate into it in the terminal:
-bash
-mkdir VotingDapp
-cd VotingDapp
+create VotingDapp folder 
+open vscode in that folder
+
 
 Initialize a Truffle project:
-bash
+terminal
+
 truffle init
 ------------------------------------------------------------------------------------------------------
 Step 2: Configure Ganache
@@ -117,18 +104,8 @@ contract Voting {
     }
 }
 
-Explanation:
-addCandidate: Allows the administrator to add new candidates.
-vote: Allows a user to vote for a candidate. It checks if the user has already voted and prevents double voting.
-getVotes: Retrieves the total votes for a given candidate.
 
----------------------------------------------------------------------------------------------------------------
-
-Step 4: Compile and Deploy the Smart Contract
-Compile the Contract:
-
-In the terminal, compile the contract:
-bash
+Step 4: in terminal
 truffle compile
 
 This generates the contract’s ABI and bytecode.
@@ -143,8 +120,9 @@ module.exports = function (deployer) {
 };
 
 
-Deploy the contract to the Ganache network:
-bash
+
+IN TERMINAL
+
 truffle migrate --network development
 
 Once deployed, copy the contract’s address from the console.
