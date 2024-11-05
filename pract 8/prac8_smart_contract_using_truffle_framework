@@ -1,2 +1,16 @@
 
 https://drive.google.com/file/d/1mx5_Kz2DkCTmJppixL2Tb_zjMnMhXK11/view?usp=sharing
+
+
+if error with truffl einstall
+
+Open System Properties:
+
+Press Win + X and select System.
+Click on Advanced system settings on the left.
+Click on Environment Variables.
+Edit the PATH variable:
+
+Under System variables, scroll down and find Path, then click Edit.
+Add the path to the npm global bin directory. This is typically:
+C:\Users\YourUsername\AppData\Roaming\npm
